@@ -26,10 +26,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         /* =========================================================
-           ULTRA-PREMIUM INSTITUTIONAL PALETTE ARCHITECTURE (5 MODES)
+           ULTRA-PREMIUM INSTITUTIONAL PALETTE ARCHITECTURE (2 MODES)
            ========================================================= */
 
-        /* 1. Deep Obsidian (Ultra-Luxury Dark / Default) */
+        /* 1. Deep Obsidian (Dark Mode) */
         html.theme-obsidian {
             --bg-main: #030712;
             --bg-surface: #0b0f19;
@@ -43,35 +43,7 @@
             --accent-glow: rgba(20, 184, 166, 0.15);
         }
 
-        /* 2. Cyber Neon Matrix (High-Contrast Electric Dark) */
-        html.theme-cyber {
-            --bg-main: #050505;
-            --bg-surface: #0c0f17;
-            --bg-card: #131824;
-            --bg-card-hover: #1c2436;
-            --border-color: #00f0ff33;
-            --border-focus: #00f0ff;
-            --text-main: #ffffff;
-            --text-muted: #8b9bb4;
-            --input-bg: #080a0f;
-            --accent-glow: rgba(0, 240, 255, 0.2);
-        }
-
-        /* 3. Executive Platinum Gold (Rich Luxury Dark & Gold) */
-        html.theme-gold {
-            --bg-main: #0a0908;
-            --bg-surface: #141210;
-            --bg-card: #1d1a17;
-            --bg-card-hover: #2b2622;
-            --border-color: #3b332d;
-            --border-focus: #fbbf24;
-            --text-main: #fef3c7;
-            --text-muted: #d4d4d8;
-            --input-bg: #0f0d0b;
-            --accent-glow: rgba(251, 191, 36, 0.15);
-        }
-
-        /* 4. Executive Titanium Gray (Ultra-Clean Luxury Pro Light with Subtle Gray Header/Cards) */
+        /* 2. Executive Titanium Gray (Light Mode) */
         html.theme-titanium {
             --bg-main: #eef1f5;
             --bg-surface: #e2e6ed;
@@ -83,20 +55,6 @@
             --text-muted: #475569;
             --input-bg: #e2e6ed;
             --accent-glow: rgba(13, 148, 136, 0.15);
-        }
-
-        /* 5. Midnight Slate Light (Deep Contrast Professional Slate Light) */
-        html.theme-frost {
-            --bg-main: #e2e8f0;
-            --bg-surface: #cbd5e1;
-            --bg-card: #b0c4de;
-            --bg-card-hover: #9fbcd7;
-            --border-color: #94a3b8;
-            --border-focus: #0284c7;
-            --text-main: #090d16;
-            --text-muted: #334155;
-            --input-bg: #cbd5e1;
-            --accent-glow: rgba(2, 132, 199, 0.15);
         }
 
         body { 
@@ -175,7 +133,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
 
-    <!-- Top VIP Animated Navigation Bar with Lighting Effect -->
+    <!-- Top VIP Animated Navigation Bar -->
     <header class="app-surface border-b animated-header-glow backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center space-x-2.5 sm:space-x-4 min-w-0">
@@ -188,9 +146,14 @@
                 <div class="min-w-0">
                     <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-wrap">
                         <h1 class="font-extrabold text-sm sm:text-lg tracking-wider shimmer-title truncate">FOREX UNCLE</h1>
-                        <span class="bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">VIP</span>
+                        <!-- VIP Badge: Hidden on mobile/tablet portrait, visible on md and up -->
+                        <span class="hidden md:inline-block bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">VIP</span>
                     </div>
-                    <p class="text-[10px] sm:text-xs app-text-muted font-mono tracking-wide truncate">Advanced Quantitative Risk & Portfolio Simulation</p>
+                    <!-- Tagline: Fully visible on desktop/tablet, concise on phone -->
+                    <p class="text-[10px] sm:text-xs app-text-muted font-mono tracking-wide truncate">
+                        <span class="inline sm:hidden">Quantitative Risk & Portfolio Simulation</span>
+                        <span class="hidden sm:inline">Advanced Quantitative Risk & Portfolio Simulation</span>
+                    </p>
                 </div>
             </div>
             
@@ -200,16 +163,13 @@
                     RISK ENGINE READY
                 </span>
 
-                <!-- Ultra-Premium 5-Mode Theme Selector Dropdown -->
-                <div class="relative">
-                    <select id="themeSelector" onchange="switchTheme(this.value)" class="app-card app-border border rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-teal-600 dark:text-teal-400 focus:outline-none shadow-lg cursor-pointer transition-all">
-                        <option value="obsidian">🌌 Deep Obsidian (Dark)</option>
-                        <option value="cyber">⚡ Cyber Neon (Dark)</option>
-                        <option value="gold">⚜️ Executive Gold (Dark)</option>
-                        <option value="titanium">💎 Titanium Gray (Light)</option>
-                        <option value="frost">❄️ Midnight Slate (Light)</option>
-                    </select>
-                </div>
+                <!-- Icon-Only Light/Dark Mode Switch Button -->
+                <button onclick="toggleThemeMode()" id="themeToggleBtn" title="Toggle Light/Dark Mode" class="app-card app-border border h-10 w-10 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center text-teal-600 dark:text-teal-400 hover:scale-105 active:scale-95 transition-all shadow-lg cursor-pointer">
+                    <!-- Sun Icon for Light Mode Activation -->
+                    <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Moon Icon for Dark Mode Activation -->
+                    <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+                </button>
             </div>
         </div>
     </header>
@@ -226,7 +186,7 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                             Core Parameters
                         </h2>
-                        <span id="execCountLabel" class="text-xs font-mono app-text-muted">60 Executions</span>
+                        <span id="execCountLabel" class="text-xs font-mono app-text-muted">15 Executions</span>
                     </div>
 
                     <div class="space-y-3.5 sm:space-y-4">
@@ -252,9 +212,9 @@
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Total Trades</label>
                                 <select id="totalTrades" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none">
-                                    <option value="15">15 Trades</option>
+                                    <option value="15" selected>15 Trades</option>
                                     <option value="30">30 Trades</option>
-                                    <option value="60" selected>60 Trades</option>
+                                    <option value="60">60 Trades</option>
                                     <option value="90">90 Trades</option>
                                     <option value="180">180 Trades</option>
                                     <option value="270">270 Trades</option>
@@ -290,7 +250,7 @@
                         <div class="app-card app-border border rounded-xl p-3.5 sm:p-4 space-y-3">
                             <div class="flex items-center justify-between">
                                 <span class="text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Instrument Specs</span>
-                                <span class="text-[10px] font-mono bg-teal-500/10 text-teal-600 dark:text-teal-400 px-2 py-0.5 rounded border border-teal-500/20">Auto-Synced</span>
+                                <span id="syncStatusBadge" class="text-[10px] font-mono bg-teal-500/10 text-teal-600 dark:text-teal-400 px-2 py-0.5 rounded border border-teal-500/20">Live API</span>
                             </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
@@ -357,10 +317,10 @@
                     <div class="relative z-10 flex flex-col">
                         <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-b app-border flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 app-card backdrop-blur-md">
                             <div class="flex items-center space-x-2.5 sm:space-x-3 flex-wrap">
-                                <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (60 Trades)</h3>
+                                <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (15 Trades)</h3>
                                 <span class="text-[9px] sm:text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold" id="modeBadge">DYNAMIC MODE</span>
                             </div>
-                            <span id="pageIndicator" class="text-[11px] sm:text-xs font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-teal-500/20 self-start sm:self-auto">Page 1 of 2</span>
+                            <span id="pageIndicator" class="text-[11px] sm:text-xs font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-teal-500/20 self-start sm:self-auto">Page 1 of 1</span>
                         </div>
                         <div class="table-container overflow-x-auto">
                             <table class="w-full text-left border-collapse text-xs font-mono whitespace-nowrap sm:whitespace-normal">
@@ -435,31 +395,88 @@
         let currentPage = 1;
         const pageSize = 30;
 
-        function switchTheme(themeName) {
+        function toggleThemeMode() {
             const html = document.documentElement;
-            html.classList.remove('theme-obsidian', 'theme-cyber', 'theme-gold', 'theme-titanium', 'theme-frost');
-            html.classList.add(`theme-${themeName}`);
-            localStorage.setItem('forexUncleTheme', themeName);
+            const currentTheme = html.classList.contains('theme-titanium') ? 'titanium' : 'obsidian';
+            const newTheme = currentTheme === 'obsidian' ? 'titanium' : 'obsidian';
+            applyTheme(newTheme);
+            localStorage.setItem('forexUncleTheme', newTheme);
+        }
+
+        function applyTheme(themeName) {
+            const html = document.documentElement;
+            html.classList.remove('theme-obsidian', 'theme-titanium', 'dark');
+            
+            if (themeName === 'titanium') {
+                html.classList.add('theme-titanium');
+                document.getElementById('sunIcon').classList.remove('hidden');
+                document.getElementById('moonIcon').classList.add('hidden');
+            } else {
+                html.classList.add('theme-obsidian', 'dark');
+                document.getElementById('sunIcon').classList.add('hidden');
+                document.getElementById('moonIcon').classList.remove('hidden');
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             const savedTheme = localStorage.getItem('forexUncleTheme') || 'obsidian';
-            const selector = document.getElementById('themeSelector');
-            if (selector) selector.value = savedTheme;
-            switchTheme(savedTheme);
+            applyTheme(savedTheme);
 
-            document.getElementById('totalTrades').value = "60";
+            document.getElementById('totalTrades').value = "15";
 
             updatePairConfigFields();
             runSimulation();
         });
 
-        function updatePairConfigFields() {
+        async function updatePairConfigFields() {
             const pair = document.getElementById('assetPair').value;
+            const marketPriceInput = document.getElementById('customMarketPrice');
+            const contractSizeInput = document.getElementById('customContractSize');
+            const syncBadge = document.getElementById('syncStatusBadge');
+
             if (pairDefaults[pair]) {
-                document.getElementById('customContractSize').value = pairDefaults[pair].contract;
-                document.getElementById('customMarketPrice').value = pairDefaults[pair].price;
+                contractSizeInput.value = pairDefaults[pair].contract;
             }
+
+            syncBadge.innerText = "Fetching API...";
+            syncBadge.className = "text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded border border-amber-500/20";
+
+            try {
+                // Fetching real-time forex/metal market prices via open public API (Frankfurter API for forex & Gold API fallback)
+                let fetchedPrice = null;
+                if (pair === 'XAUUSD') {
+                    const res = await fetch('https://api.gold-api.com/price/XAU');
+                    const data = await res.json();
+                    if (data && data.price) fetchedPrice = parseFloat(data.price);
+                } else if (pair === 'XAGUSD') {
+                    const res = await fetch('https://api.gold-api.com/price/XAG');
+                    const data = await res.json();
+                    if (data && data.price) fetchedPrice = parseFloat(data.price);
+                } else {
+                    const base = pair.substring(0, 3);
+                    const target = pair.substring(3, 6);
+                    const res = await fetch(`https://api.frankfurter.app/latest?from=${base}&to=${target}`);
+                    const data = await res.json();
+                    if (data && data.rates && data.rates[target]) {
+                        fetchedPrice = parseFloat(data.rates[target]);
+                    }
+                }
+
+                if (fetchedPrice) {
+                    marketPriceInput.value = fetchedPrice;
+                    syncBadge.innerText = "Live API OK";
+                    syncBadge.className = "text-[10px] font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded border border-emerald-500/20";
+                } else {
+                    throw new Error("Fallback required");
+                }
+            } catch (e) {
+                if (pairDefaults[pair]) {
+                    marketPriceInput.value = pairDefaults[pair].price;
+                }
+                syncBadge.innerText = "Default Sync";
+                syncBadge.className = "text-[10px] font-mono bg-teal-500/10 text-teal-600 dark:text-teal-400 px-2 py-0.5 rounded border border-teal-500/20";
+            }
+            runSimulation();
         }
 
         function runSimulation() {
@@ -576,11 +593,11 @@
                 tbody.appendChild(row);
             });
 
-            const totalPages = Math.ceil(allTradesData.length / pageSize);
+            const totalPages = Math.ceil(allTradesData.length / pageSize) || 1;
             document.getElementById('pageIndicator').innerText = `Page ${currentPage} of ${totalPages} (Trades ${startIndex + 1} - ${endIndex})`;
             
             document.getElementById('prevBtn').disabled = currentPage === 1;
-            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+            document.getElementById('nextBtn').disabled = currentPage >= totalPages;
 
             const pageNumbersContainer = document.getElementById('pageNumbers');
             pageNumbersContainer.innerHTML = '';
@@ -600,7 +617,7 @@
             return `$${val.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         }
 
-        changePage = function(direction) {
+        function changePage(direction) {
             const totalPages = Math.ceil(allTradesData.length / pageSize);
             currentPage += direction;
             if (currentPage < 1) currentPage = 1;
