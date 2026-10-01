@@ -25,11 +25,6 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* =========================================================
-           ULTRA-PREMIUM INSTITUTIONAL PALETTE ARCHITECTURE (2 MODES)
-           ========================================================= */
-
-        /* 1. Deep Obsidian (Dark Mode) */
         html.theme-obsidian {
             --bg-main: #030712;
             --bg-surface: #0b0f19;
@@ -43,7 +38,6 @@
             --accent-glow: rgba(20, 184, 166, 0.15);
         }
 
-        /* 2. Executive Titanium Gray (Light Mode) */
         html.theme-titanium {
             --bg-main: #eef1f5;
             --bg-surface: #e2e6ed;
@@ -91,7 +85,6 @@
         }
         @media (min-width: 768px) { .watermark-bg::after { font-size: 5.5rem; } }
 
-        /* Component Classes with smooth transition */
         .app-surface { background-color: var(--bg-surface); border-color: var(--border-color); transition: background-color 0.3s, border-color 0.3s; }
         .app-card { background-color: var(--bg-card); border-color: var(--border-color); transition: background-color 0.3s, border-color 0.3s; }
         .app-card:hover { background-color: var(--bg-card-hover); }
@@ -100,23 +93,18 @@
         .app-input:focus { border-color: var(--border-focus); box-shadow: 0 0 0 2px var(--accent-glow); }
         .app-text-muted { color: var(--text-muted); }
 
-        /* Animated Header Lighting & Shimmer Effects */
         @keyframes headerGlow {
             0% { border-color: rgba(20, 184, 166, 0.2); box-shadow: 0 4px 25px -2px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(20, 184, 166, 0.1); }
             50% { border-color: rgba(20, 184, 166, 0.7); box-shadow: 0 6px 35px 4px rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(20, 184, 166, 0.25); }
             100% { border-color: rgba(20, 184, 166, 0.2); box-shadow: 0 4px 25px -2px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(20, 184, 166, 0.1); }
         }
-        .animated-header-glow {
-            animation: headerGlow 4s ease-in-out infinite;
-        }
+        .animated-header-glow { animation: headerGlow 4s ease-in-out infinite; }
 
         @keyframes logoFloat {
             0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 4px 12px rgba(20, 184, 166, 0.25)); }
             50% { transform: translateY(-3px) scale(1.02); filter: drop-shadow(0 8px 20px rgba(20, 184, 166, 0.45)); }
         }
-        .elegant-logo-box {
-            animation: logoFloat 4s ease-in-out infinite;
-        }
+        .elegant-logo-box { animation: logoFloat 4s ease-in-out infinite; }
 
         @keyframes shimmerText {
             0% { background-position: -200% center; }
@@ -129,15 +117,49 @@
             -webkit-background-clip: text;
             animation: shimmerText 6s linear infinite;
         }
+
+        /* PRINT STYLING STACK */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            header, footer, .no-print, button, select, input {
+                display: none !important;
+            }
+            .print-container {
+                display: block !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                background: white !important;
+                color: black !important;
+            }
+            .app-surface, .app-card {
+                background: white !important;
+                border: 1px solid #ccc !important;
+                box-shadow: none !important;
+                color: black !important;
+            }
+            table {
+                width: 100% !important;
+                border-collapse: collapse !important;
+            }
+            th, td {
+                border: 1px solid #ddd !important;
+                padding: 6px 8px !important;
+                color: black !important;
+                font-size: 11px !important;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
 
     <!-- Top VIP Animated Navigation Bar -->
-    <header class="app-surface border-b animated-header-glow backdrop-blur-xl sticky top-0 z-50">
+    <header class="app-surface border-b animated-header-glow backdrop-blur-xl sticky top-0 z-50 no-print">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             <div class="flex items-center space-x-2.5 sm:space-x-4 min-w-0">
-                <!-- Elegant Animated Logo Icon Box -->
                 <div class="h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-tr from-amber-500 via-teal-400 to-emerald-500 flex items-center justify-center p-0.5 flex-shrink-0 elegant-logo-box">
                     <div class="h-full w-full app-surface rounded-[10px] flex items-center justify-center">
                         <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -146,13 +168,10 @@
                 <div class="min-w-0">
                     <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-wrap">
                         <h1 class="font-extrabold text-sm sm:text-lg tracking-wider shimmer-title truncate">FOREX UNCLE</h1>
-                        <!-- VIP Badge: Hidden on mobile/tablet portrait, visible on md and up -->
                         <span class="hidden md:inline-block bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">VIP</span>
                     </div>
-                    <!-- Tagline: Fully visible on desktop/tablet, concise on phone -->
                     <p class="text-[10px] sm:text-xs app-text-muted font-mono tracking-wide truncate">
-                        <span class="inline sm:hidden">Quantitative Risk & Portfolio Simulation</span>
-                        <span class="hidden sm:inline">Advanced Quantitative Risk & Portfolio Simulation</span>
+                        Advanced Quantitative Risk & Portfolio Simulation
                     </p>
                 </div>
             </div>
@@ -163,11 +182,8 @@
                     RISK ENGINE READY
                 </span>
 
-                <!-- Icon-Only Light/Dark Mode Switch Button -->
                 <button onclick="toggleThemeMode()" id="themeToggleBtn" title="Toggle Light/Dark Mode" class="app-card app-border border h-10 w-10 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center text-teal-600 dark:text-teal-400 hover:scale-105 active:scale-95 transition-all shadow-lg cursor-pointer">
-                    <!-- Sun Icon for Light Mode Activation -->
                     <svg id="sunIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <!-- Moon Icon for Dark Mode Activation -->
                     <svg id="moonIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
                 </button>
             </div>
@@ -179,7 +195,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8">
             
             <!-- Parameters Configuration Panel (Left) -->
-            <div class="lg:col-span-4 app-surface app-border border rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col justify-between watermark-bg">
+            <div class="lg:col-span-4 app-surface app-border border rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col justify-between watermark-bg no-print">
                 <div class="relative z-10">
                     <div class="flex items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-6 border-b app-border">
                         <h2 class="font-semibold text-xs uppercase tracking-wider text-teal-600 dark:text-teal-400 flex items-center">
@@ -195,7 +211,6 @@
                             <input type="number" id="initBalance" value="1000" step="100" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                         </div>
 
-                        <!-- Risk Sizing Mode Selection -->
                         <div>
                             <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Risk Sizing Mode</label>
                             <select id="riskMode" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono text-teal-600 dark:text-teal-400 font-bold focus:outline-none" onchange="runSimulation()">
@@ -282,9 +297,13 @@
                     </div>
                 </div>
 
-                <div class="mt-5 sm:mt-6 pt-4 border-t app-border relative z-10">
+                <div class="mt-5 sm:mt-6 pt-4 border-t app-border relative z-10 space-y-3">
                     <button onclick="runSimulation()" class="w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-400 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-xl shadow-teal-500/20 transition-all duration-200 text-sm tracking-wider uppercase active:scale-[0.98]">
                         Execute Simulation Matrix
+                    </button>
+                    <button onclick="printSimulationPlan()" class="w-full app-card app-border border hover:opacity-80 text-teal-600 dark:text-teal-400 font-bold py-3 px-4 rounded-xl shadow-lg transition-all text-xs tracking-wider uppercase flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                        <span>Print Simulation Roadmap</span>
                     </button>
                 </div>
             </div>
@@ -313,14 +332,14 @@
                 </div>
 
                 <!-- Execution Ledger Table -->
-                <div class="app-surface app-border border rounded-2xl shadow-2xl flex flex-col justify-between overflow-hidden watermark-bg">
+                <div class="app-surface app-border border rounded-2xl shadow-2xl flex flex-col justify-between overflow-hidden watermark-bg print-container">
                     <div class="relative z-10 flex flex-col">
                         <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-b app-border flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 app-card backdrop-blur-md">
                             <div class="flex items-center space-x-2.5 sm:space-x-3 flex-wrap">
                                 <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (15 Trades)</h3>
                                 <span class="text-[9px] sm:text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold" id="modeBadge">DYNAMIC MODE</span>
                             </div>
-                            <span id="pageIndicator" class="text-[11px] sm:text-xs font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-teal-500/20 self-start sm:self-auto">Page 1 of 1</span>
+                            <span id="pageIndicator" class="text-[11px] sm:text-xs font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-teal-500/20 self-start sm:self-auto no-print">Page 1 of 1</span>
                         </div>
                         <div class="table-container overflow-x-auto">
                             <table class="w-full text-left border-collapse text-xs font-mono whitespace-nowrap sm:whitespace-normal">
@@ -345,7 +364,7 @@
                     </div>
 
                     <!-- Pagination Navigation Footer -->
-                    <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-t app-border app-card backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
+                    <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-t app-border app-card backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10 no-print">
                         <button onclick="changePage(-1)" id="prevBtn" class="w-full sm:w-auto app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
                             &larr; Previous
                         </button>
@@ -364,7 +383,7 @@
     </main>
 
     <!-- VIP Footer -->
-    <footer class="app-surface border-t py-5 sm:py-6 mt-6 sm:mt-8 shadow-2xl">
+    <footer class="app-surface border-t py-5 sm:py-6 mt-6 sm:mt-8 shadow-2xl no-print">
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs app-text-muted font-mono gap-3 text-center md:text-left">
             <div class="flex items-center space-x-2 sm:space-x-3 justify-center flex-wrap">
                 <span class="font-bold text-teal-600 dark:text-teal-400 tracking-wider">FOREX UNCLE VIP MATRIX</span>
@@ -507,13 +526,11 @@
                 let startEquity = equity;
                 let baseEquityForSizing = (riskMode === 'static') ? initialStartingEquity : startEquity;
 
-                // Max allowed risk capital in USD based on equity percentage (e.g. 30%)
                 let maxAllowedRiskDollar = baseEquityForSizing * (maxRiskCapPct / 100);
 
-                // Determine pip/point value per 1 standard lot
                 let pipValuePerLot = 10;
                 if (pair === 'XAUUSD') {
-                    pipValuePerLot = contractSize * 0.1; // For Gold, 1 point ($0.10 move) per lot
+                    pipValuePerLot = contractSize * 0.1;
                 } else if (pair === 'XAGUSD') {
                     pipValuePerLot = contractSize * 0.01;
                 } else if (pair.includes('JPY')) {
@@ -522,10 +539,7 @@
                     pipValuePerLot = contractSize * 0.0001;
                 }
 
-                // Risk-based lot size from Stop Loss points
                 let riskBasedLotSize = maxAllowedRiskDollar / (pipValuePerLot * slPoints);
-                
-                // Margin-based lot size cap
                 let maxAllowedMargin = baseEquityForSizing * (maxRiskCapPct / 100);
                 let maxNotionalByMargin = maxAllowedMargin * leverage;
                 let marginBasedLotSize = maxNotionalByMargin / (contractSize * marketPrice);
@@ -632,6 +646,10 @@
             if (currentPage < 1) currentPage = 1;
             if (currentPage > totalPages) currentPage = totalPages;
             renderPage();
+        }
+
+        function printSimulationPlan() {
+            window.print();
         }
     </script>
 </body>
