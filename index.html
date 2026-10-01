@@ -192,13 +192,13 @@
                     <div class="space-y-3.5 sm:space-y-4">
                         <div>
                             <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Initial Account Equity ($)</label>
-                            <input type="number" id="initBalance" value="1000" step="100" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            <input type="number" id="initBalance" value="1000" step="100" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                         </div>
 
                         <!-- Risk Sizing Mode Selection -->
                         <div>
                             <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Risk Sizing Mode</label>
-                            <select id="riskMode" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono text-teal-600 dark:text-teal-400 font-bold focus:outline-none">
+                            <select id="riskMode" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono text-teal-600 dark:text-teal-400 font-bold focus:outline-none" onchange="runSimulation()">
                                 <option value="dynamic">Dynamic Compound (Equity-Based)</option>
                                 <option value="static">Static Fixed (Initial Balance-Based)</option>
                             </select>
@@ -207,11 +207,11 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Leverage Ratio</label>
-                                <input type="number" id="leverage" value="20" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                                <input type="number" id="leverage" value="20" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Total Trades</label>
-                                <select id="totalTrades" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none">
+                                <select id="totalTrades" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none" onchange="runSimulation()">
                                     <option value="15" selected>15 Trades</option>
                                     <option value="30">30 Trades</option>
                                     <option value="60">60 Trades</option>
@@ -225,7 +225,7 @@
 
                         <div>
                             <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Maximum Risk Capital Cap per Trade (%)</label>
-                            <input type="number" id="maxMarginPct" value="30.0" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            <input type="number" id="maxMarginPct" value="30.0" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                         </div>
 
                         <div>
@@ -255,11 +255,11 @@
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[11px] app-text-muted mb-1">Contract Size</label>
-                                    <input type="number" id="customContractSize" value="100" step="1" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none">
+                                    <input type="number" id="customContractSize" value="100" step="1" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none" oninput="runSimulation()">
                                 </div>
                                 <div>
                                     <label class="block text-[11px] app-text-muted mb-1">Market Price ($)</label>
-                                    <input type="number" id="customMarketPrice" value="2650" step="0.0001" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none">
+                                    <input type="number" id="customMarketPrice" value="2650" step="0.0001" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none" oninput="runSimulation()">
                                 </div>
                             </div>
                         </div>
@@ -267,17 +267,17 @@
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Stop Loss (Points)</label>
-                                <input type="number" id="stopLossPips" value="30" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                                <input type="number" id="stopLossPips" value="30" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                             </div>
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Risk-Reward Ratio</label>
-                                <input type="number" id="rrRatio" value="2.0" step="0.1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                                <input type="number" id="rrRatio" value="2.0" step="0.1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Expected Win Rate (%)</label>
-                            <input type="number" id="winRate" value="50" min="1" max="99" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            <input type="number" id="winRate" value="50" min="1" max="99" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none" oninput="runSimulation()">
                         </div>
                     </div>
                 </div>
@@ -442,7 +442,6 @@
             syncBadge.className = "text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded border border-amber-500/20";
 
             try {
-                // Fetching real-time forex/metal market prices via open public API (Frankfurter API for forex & Gold API fallback)
                 let fetchedPrice = null;
                 if (pair === 'XAUUSD') {
                     const res = await fetch('https://api.gold-api.com/price/XAU');
@@ -480,17 +479,17 @@
         }
 
         function runSimulation() {
-            let equity = parseFloat(document.getElementById('initBalance').value);
-            const leverage = parseFloat(document.getElementById('leverage').value);
-            const maxRiskCapPct = parseFloat(document.getElementById('maxMarginPct').value) / 100;
-            const totalTrades = parseInt(document.getElementById('totalTrades').value);
+            let equity = parseFloat(document.getElementById('initBalance').value) || 1000;
+            const leverage = parseFloat(document.getElementById('leverage').value) || 20;
+            const maxRiskCapPct = parseFloat(document.getElementById('maxMarginPct').value) || 30;
+            const totalTrades = parseInt(document.getElementById('totalTrades').value) || 15;
             const riskMode = document.getElementById('riskMode').value;
             const pair = document.getElementById('assetPair').value;
-            const contractSize = parseFloat(document.getElementById('customContractSize').value);
-            const marketPrice = parseFloat(document.getElementById('customMarketPrice').value);
-            const slPoints = parseFloat(document.getElementById('stopLossPips').value);
-            const rr = parseFloat(document.getElementById('rrRatio').value);
-            const targetWinRate = parseFloat(document.getElementById('winRate').value) / 100;
+            const contractSize = parseFloat(document.getElementById('customContractSize').value) || 100;
+            const marketPrice = parseFloat(document.getElementById('customMarketPrice').value) || 2650;
+            const slPoints = parseFloat(document.getElementById('stopLossPips').value) || 30;
+            const rr = parseFloat(document.getElementById('rrRatio').value) || 2.0;
+            const targetWinRate = (parseFloat(document.getElementById('winRate').value) || 50) / 100;
             
             const initialStartingEquity = equity;
             let wins = 0;
@@ -508,34 +507,42 @@
                 let startEquity = equity;
                 let baseEquityForSizing = (riskMode === 'static') ? initialStartingEquity : startEquity;
 
-                let maxAllowedRiskDollar = baseEquityForSizing * maxRiskCapPct;
+                // Max allowed risk capital in USD based on equity percentage (e.g. 30%)
+                let maxAllowedRiskDollar = baseEquityForSizing * (maxRiskCapPct / 100);
 
-                let dollarPerPointPerLot = (pair.includes('USD') && !pair.startsWith('USD') && pair !== 'XAUUSD' && pair !== 'XAGUSD') ? 10 : (contractSize * 0.0001 * 10);
-                if (pair === 'XAUUSD') dollarPerPointPerLot = contractSize;
-                if (pair === 'XAGUSD') dollarPerPointPerLot = contractSize * 0.01;
+                // Determine pip/point value per 1 standard lot
+                let pipValuePerLot = 10;
+                if (pair === 'XAUUSD') {
+                    pipValuePerLot = contractSize * 0.1; // For Gold, 1 point ($0.10 move) per lot
+                } else if (pair === 'XAGUSD') {
+                    pipValuePerLot = contractSize * 0.01;
+                } else if (pair.includes('JPY')) {
+                    pipValuePerLot = (contractSize * 0.01) / marketPrice; 
+                } else {
+                    pipValuePerLot = contractSize * 0.0001;
+                }
 
-                let riskBasedLotSize = maxAllowedRiskDollar / (dollarPerPointPerLot * slPoints);
+                // Risk-based lot size from Stop Loss points
+                let riskBasedLotSize = maxAllowedRiskDollar / (pipValuePerLot * slPoints);
                 
-                let maxAllowedMargin = baseEquityForSizing * maxRiskCapPct;
+                // Margin-based lot size cap
+                let maxAllowedMargin = baseEquityForSizing * (maxRiskCapPct / 100);
                 let maxNotionalByMargin = maxAllowedMargin * leverage;
                 let marginBasedLotSize = maxNotionalByMargin / (contractSize * marketPrice);
 
                 let finalLotSize = Math.min(riskBasedLotSize, marginBasedLotSize);
                 
-                if (baseEquityForSizing <= 1000 && pair === 'XAUUSD' && maxRiskCapPct <= 0.30) {
-                    finalLotSize = Math.min(finalLotSize, 0.01);
-                }
-
                 finalLotSize = Math.floor(finalLotSize * 100) / 100;
                 if (finalLotSize < 0.01) finalLotSize = 0.01;
 
                 let actualNotional = finalLotSize * contractSize * marketPrice;
                 let actualMarginUsed = actualNotional / leverage;
-                let actualRiskDollar = finalLotSize * dollarPerPointPerLot * slPoints;
+                let actualRiskDollar = finalLotSize * pipValuePerLot * slPoints;
                 let totalProfitDollar = actualRiskDollar * rr;
 
                 let netPL = isWin ? totalProfitDollar : -actualRiskDollar;
                 equity += netPL;
+                if (equity < 0) equity = 0;
 
                 allTradesData.push({
                     id: i,
@@ -548,10 +555,12 @@
                     pl: netPL,
                     endEq: equity
                 });
+
+                if (equity <= 0) break;
             }
 
             let netPLTotal = equity - initialStartingEquity;
-            let returnPct = (netPLTotal / initialStartingEquity) * 100;
+            let returnPct = initialStartingEquity > 0 ? (netPLTotal / initialStartingEquity) * 100 : 0;
 
             document.getElementById('resEndBalance').innerText = `$${equity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
