@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" class="theme-obsidian dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <title>Forex Uncle // Advanced Quantitative Risk & Portfolio Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            teal: '#14b8a6',
+                            emerald: '#10b981',
+                            amber: '#f59e0b',
+                            rose: '#f43f5e',
+                            gold: '#fbbf24'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* =========================================================
+           ULTRA-PREMIUM INSTITUTIONAL PALETTE ARCHITECTURE (5 MODES)
+           ========================================================= */
+
+        /* 1. Deep Obsidian (Ultra-Luxury Dark / Default) */
+        html.theme-obsidian {
+            --bg-main: #030712;
+            --bg-surface: #0b0f19;
+            --bg-card: #111827;
+            --bg-card-hover: #1f2937;
+            --border-color: #1f2937;
+            --border-focus: #14b8a6;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --input-bg: #030712;
+            --accent-glow: rgba(20, 184, 166, 0.15);
+        }
+
+        /* 2. Cyber Neon Matrix (High-Contrast Electric Dark) */
+        html.theme-cyber {
+            --bg-main: #050505;
+            --bg-surface: #0c0f17;
+            --bg-card: #131824;
+            --bg-card-hover: #1c2436;
+            --border-color: #00f0ff33;
+            --border-focus: #00f0ff;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --input-bg: #080a0f;
+            --accent-glow: rgba(0, 240, 255, 0.2);
+        }
+
+        /* 3. Executive Platinum Gold (Rich Luxury Dark & Gold) */
+        html.theme-gold {
+            --bg-main: #0a0908;
+            --bg-surface: #141210;
+            --bg-card: #1d1a17;
+            --bg-card-hover: #2b2622;
+            --border-color: #3b332d;
+            --border-focus: #fbbf24;
+            --text-main: #fef3c7;
+            --text-muted: #d4d4d8;
+            --input-bg: #0f0d0b;
+            --accent-glow: rgba(251, 191, 36, 0.15);
+        }
+
+        /* 4. Executive Titanium Gray (Ultra-Clean Luxury Pro Light with Subtle Gray Header/Cards) */
+        html.theme-titanium {
+            --bg-main: #eef1f5;
+            --bg-surface: #e2e6ed;
+            --bg-card: #d8dee8;
+            --bg-card-hover: #ccd4df;
+            --border-color: #bcc6d4;
+            --border-focus: #0d9488;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --input-bg: #e2e6ed;
+            --accent-glow: rgba(13, 148, 136, 0.15);
+        }
+
+        /* 5. Midnight Slate Light (Deep Contrast Professional Slate Light) */
+        html.theme-frost {
+            --bg-main: #e2e8f0;
+            --bg-surface: #cbd5e1;
+            --bg-card: #b0c4de;
+            --bg-card-hover: #9fbcd7;
+            --border-color: #94a3b8;
+            --border-focus: #0284c7;
+            --text-main: #090d16;
+            --text-muted: #334155;
+            --input-bg: #cbd5e1;
+            --accent-glow: rgba(2, 132, 199, 0.15);
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        @media (min-width: 768px) { ::-webkit-scrollbar { width: 7px; height: 7px; } }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.5); }
+        
+        .watermark-bg { position: relative; overflow: hidden; }
+        .watermark-bg::after {
+            content: "FOREX UNCLE VIP";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-25deg);
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: currentColor;
+            opacity: 0.025;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 0;
+            letter-spacing: 0.3em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        @media (min-width: 768px) { .watermark-bg::after { font-size: 5.5rem; } }
+
+        /* Component Classes with smooth transition */
+        .app-surface { background-color: var(--bg-surface); border-color: var(--border-color); transition: background-color 0.3s, border-color 0.3s; }
+        .app-card { background-color: var(--bg-card); border-color: var(--border-color); transition: background-color 0.3s, border-color 0.3s; }
+        .app-card:hover { background-color: var(--bg-card-hover); }
+        .app-border { border-color: var(--border-color); transition: border-color 0.3s; }
+        .app-input { background-color: var(--input-bg); border-color: var(--border-color); color: var(--text-main); transition: background-color 0.3s, border-color 0.3s, color 0.3s; }
+        .app-input:focus { border-color: var(--border-focus); box-shadow: 0 0 0 2px var(--accent-glow); }
+        .app-text-muted { color: var(--text-muted); }
+
+        /* Animated Header Lighting & Shimmer Effects */
+        @keyframes headerGlow {
+            0% { border-color: rgba(20, 184, 166, 0.2); box-shadow: 0 4px 25px -2px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(20, 184, 166, 0.1); }
+            50% { border-color: rgba(20, 184, 166, 0.7); box-shadow: 0 6px 35px 4px rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(20, 184, 166, 0.25); }
+            100% { border-color: rgba(20, 184, 166, 0.2); box-shadow: 0 4px 25px -2px rgba(20, 184, 166, 0.15), inset 0 1px 0 rgba(20, 184, 166, 0.1); }
+        }
+        .animated-header-glow {
+            animation: headerGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 4px 12px rgba(20, 184, 166, 0.25)); }
+            50% { transform: translateY(-3px) scale(1.02); filter: drop-shadow(0 8px 20px rgba(20, 184, 166, 0.45)); }
+        }
+        .elegant-logo-box {
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes shimmerText {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-title {
+            background: linear-gradient(90deg, #14b8a6 0%, #10b981 25%, #f59e0b 50%, #10b981 75%, #14b8a6 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            animation: shimmerText 6s linear infinite;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white">
+
+    <!-- Top VIP Animated Navigation Bar with Lighting Effect -->
+    <header class="app-surface border-b animated-header-glow backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5 sm:space-x-4 min-w-0">
+                <!-- Elegant Animated Logo Icon Box -->
+                <div class="h-9 w-9 sm:h-11 sm:w-11 rounded-xl bg-gradient-to-tr from-amber-500 via-teal-400 to-emerald-500 flex items-center justify-center p-0.5 flex-shrink-0 elegant-logo-box">
+                    <div class="h-full w-full app-surface rounded-[10px] flex items-center justify-center">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-teal-500 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                </div>
+                <div class="min-w-0">
+                    <div class="flex items-center space-x-1.5 sm:space-x-2.5 flex-wrap">
+                        <h1 class="font-extrabold text-sm sm:text-lg tracking-wider shimmer-title truncate">FOREX UNCLE</h1>
+                        <span class="bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30 text-[9px] sm:text-[10px] font-mono px-1.5 sm:px-2 py-0.5 rounded-full font-bold uppercase tracking-widest shadow-sm">VIP</span>
+                    </div>
+                    <p class="text-[10px] sm:text-xs app-text-muted font-mono tracking-wide truncate">Advanced Quantitative Risk & Portfolio Simulation</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+                <span class="hidden md:inline-flex items-center px-3.5 py-1.5 rounded-xl text-xs font-mono bg-teal-500/10 text-teal-600 dark:text-teal-400 border border-teal-500/30 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span>
+                    RISK ENGINE READY
+                </span>
+
+                <!-- Ultra-Premium 5-Mode Theme Selector Dropdown -->
+                <div class="relative">
+                    <select id="themeSelector" onchange="switchTheme(this.value)" class="app-card app-border border rounded-xl px-3.5 py-2 text-xs font-mono font-bold text-teal-600 dark:text-teal-400 focus:outline-none shadow-lg cursor-pointer transition-all">
+                        <option value="obsidian">🌌 Deep Obsidian (Dark)</option>
+                        <option value="cyber">⚡ Cyber Neon (Dark)</option>
+                        <option value="gold">⚜️ Executive Gold (Dark)</option>
+                        <option value="titanium">💎 Titanium Gray (Light)</option>
+                        <option value="frost">❄️ Midnight Slate (Light)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 w-full flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-8">
+            
+            <!-- Parameters Configuration Panel (Left) -->
+            <div class="lg:col-span-4 app-surface app-border border rounded-2xl p-4 sm:p-6 shadow-2xl flex flex-col justify-between watermark-bg">
+                <div class="relative z-10">
+                    <div class="flex items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-6 border-b app-border">
+                        <h2 class="font-semibold text-xs uppercase tracking-wider text-teal-600 dark:text-teal-400 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                            Core Parameters
+                        </h2>
+                        <span id="execCountLabel" class="text-xs font-mono app-text-muted">60 Executions</span>
+                    </div>
+
+                    <div class="space-y-3.5 sm:space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Initial Account Equity ($)</label>
+                            <input type="number" id="initBalance" value="1000" step="100" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                        </div>
+
+                        <!-- Risk Sizing Mode Selection -->
+                        <div>
+                            <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Risk Sizing Mode</label>
+                            <select id="riskMode" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono text-teal-600 dark:text-teal-400 font-bold focus:outline-none">
+                                <option value="dynamic">Dynamic Compound (Equity-Based)</option>
+                                <option value="static">Static Fixed (Initial Balance-Based)</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Leverage Ratio</label>
+                                <input type="number" id="leverage" value="20" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Total Trades</label>
+                                <select id="totalTrades" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none">
+                                    <option value="15">15 Trades</option>
+                                    <option value="30">30 Trades</option>
+                                    <option value="60" selected>60 Trades</option>
+                                    <option value="90">90 Trades</option>
+                                    <option value="180">180 Trades</option>
+                                    <option value="270">270 Trades</option>
+                                    <option value="360">360 Trades</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Maximum Risk Capital Cap per Trade (%)</label>
+                            <input type="number" id="maxMarginPct" value="30.0" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Select Asset Instrument</label>
+                            <select id="assetPair" onchange="updatePairConfigFields()" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                                <optgroup label="Metals & Commodities">
+                                    <option value="XAUUSD">XAUUSD (Gold)</option>
+                                    <option value="XAGUSD">XAGUSD (Silver)</option>
+                                </optgroup>
+                                <optgroup label="Major Forex Pairs">
+                                    <option value="EURUSD">EURUSD</option>
+                                    <option value="GBPUSD">GBPUSD</option>
+                                    <option value="USDJPY">USDJPY</option>
+                                    <option value="AUDUSD">AUDUSD</option>
+                                    <option value="USDCAD">USDCAD</option>
+                                    <option value="USDCHF">USDCHF</option>
+                                    <option value="NZDUSD">NZDUSD</option>
+                                </optgroup>
+                            </select>
+                        </div>
+
+                        <div class="app-card app-border border rounded-xl p-3.5 sm:p-4 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-semibold text-teal-600 dark:text-teal-400 uppercase tracking-wider">Instrument Specs</span>
+                                <span class="text-[10px] font-mono bg-teal-500/10 text-teal-600 dark:text-teal-400 px-2 py-0.5 rounded border border-teal-500/20">Auto-Synced</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[11px] app-text-muted mb-1">Contract Size</label>
+                                    <input type="number" id="customContractSize" value="100" step="1" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] app-text-muted mb-1">Market Price ($)</label>
+                                    <input type="number" id="customMarketPrice" value="2650" step="0.0001" class="w-full app-input border rounded-lg px-3 py-2 text-xs font-mono focus:outline-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Stop Loss (Points)</label>
+                                <input type="number" id="stopLossPips" value="30" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Risk-Reward Ratio</label>
+                                <input type="number" id="rrRatio" value="2.0" step="0.1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Expected Win Rate (%)</label>
+                            <input type="number" id="winRate" value="50" min="1" max="99" step="1" class="w-full app-input border rounded-xl px-4 py-2.5 text-sm font-mono focus:outline-none">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-5 sm:mt-6 pt-4 border-t app-border relative z-10">
+                    <button onclick="runSimulation()" class="w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-400 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-xl shadow-teal-500/20 transition-all duration-200 text-sm tracking-wider uppercase active:scale-[0.98]">
+                        Execute Simulation Matrix
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analytics Dashboard & Ledger (Right) -->
+            <div class="lg:col-span-8 space-y-4 sm:space-y-6 flex flex-col">
+                
+                <!-- Performance Metrics Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                    <div class="app-surface app-border border rounded-2xl p-3.5 sm:p-4 shadow-xl">
+                        <div class="text-[10px] sm:text-[11px] font-medium app-text-muted uppercase tracking-wider mb-1">Final Balance</div>
+                        <div class="text-lg sm:text-xl font-bold font-mono truncate" id="resEndBalance">$1,000.00</div>
+                    </div>
+                    <div class="app-surface app-border border rounded-2xl p-3.5 sm:p-4 shadow-xl">
+                        <div class="text-[10px] sm:text-[11px] font-medium app-text-muted uppercase tracking-wider mb-1">Net P / L</div>
+                        <div class="text-lg sm:text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400 truncate" id="resNetPL">+$0.00</div>
+                    </div>
+                    <div class="app-surface app-border border rounded-2xl p-3.5 sm:p-4 shadow-xl">
+                        <div class="text-[10px] sm:text-[11px] font-medium app-text-muted uppercase tracking-wider mb-1">Total Return</div>
+                        <div class="text-lg sm:text-xl font-bold font-mono text-emerald-600 dark:text-emerald-400 truncate" id="resReturnPct">+0.00%</div>
+                    </div>
+                    <div class="app-surface app-border border rounded-2xl p-3.5 sm:p-4 shadow-xl">
+                        <div class="text-[10px] sm:text-[11px] font-medium app-text-muted uppercase tracking-wider mb-1">Simulated Win Rate</div>
+                        <div class="text-lg sm:text-xl font-bold font-mono text-teal-600 dark:text-teal-400 truncate" id="resActualWinRate">0% (0/0)</div>
+                    </div>
+                </div>
+
+                <!-- Execution Ledger Table -->
+                <div class="app-surface app-border border rounded-2xl shadow-2xl flex flex-col justify-between overflow-hidden watermark-bg">
+                    <div class="relative z-10 flex flex-col">
+                        <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-b app-border flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 app-card backdrop-blur-md">
+                            <div class="flex items-center space-x-2.5 sm:space-x-3 flex-wrap">
+                                <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (60 Trades)</h3>
+                                <span class="text-[9px] sm:text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold" id="modeBadge">DYNAMIC MODE</span>
+                            </div>
+                            <span id="pageIndicator" class="text-[11px] sm:text-xs font-mono text-teal-600 dark:text-teal-400 bg-teal-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-teal-500/20 self-start sm:self-auto">Page 1 of 2</span>
+                        </div>
+                        <div class="table-container overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-xs font-mono whitespace-nowrap sm:whitespace-normal">
+                                <thead>
+                                    <tr class="app-card app-text-muted uppercase tracking-wider text-[10px] border-b app-border sticky top-0 z-20 backdrop-blur-md">
+                                        <th class="py-3 px-3 sm:px-4">#</th>
+                                        <th class="py-3 px-3 sm:px-4">Pair</th>
+                                        <th class="py-3 px-3 sm:px-4">Equity Before</th>
+                                        <th class="py-3 px-3 sm:px-4">Lot Size</th>
+                                        <th class="py-3 px-3 sm:px-4">Risk ($)</th>
+                                        <th class="py-3 px-3 sm:px-4">Margin</th>
+                                        <th class="py-3 px-3 sm:px-4">Status</th>
+                                        <th class="py-3 px-3 sm:px-4">P/L ($)</th>
+                                        <th class="py-3 px-3 sm:px-4">Ending Equity</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tradeBody" class="divide-y app-border">
+                                    <!-- Dynamic rows populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pagination Navigation Footer -->
+                    <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-t app-border app-card backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10">
+                        <button onclick="changePage(-1)" id="prevBtn" class="w-full sm:w-auto app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                            &larr; Previous
+                        </button>
+                        <div id="pageNumbers" class="flex items-center space-x-1.5 font-mono text-xs app-text-muted overflow-x-auto max-w-full py-1">
+                            <!-- Page number bubbles -->
+                        </div>
+                        <button onclick="changePage(1)" id="nextBtn" class="w-full sm:w-auto app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2 rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                            Next &rarr;
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- VIP Footer -->
+    <footer class="app-surface border-t py-5 sm:py-6 mt-6 sm:mt-8 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between text-xs app-text-muted font-mono gap-3 text-center md:text-left">
+            <div class="flex items-center space-x-2 sm:space-x-3 justify-center flex-wrap">
+                <span class="font-bold text-teal-600 dark:text-teal-400 tracking-wider">FOREX UNCLE VIP MATRIX</span>
+                <span class="hidden md:inline app-text-muted">|</span>
+                <span>Institutional Risk Protocol</span>
+            </div>
+            <div class="flex items-center space-x-4 sm:space-x-6 justify-center flex-wrap">
+                <span class="flex items-center text-emerald-600 dark:text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-2"></span> Secure Session</span>
+                <span>&copy; 2026 All Rights Reserved</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const pairDefaults = {
+            "XAUUSD": { contract: 100, price: 2650 },
+            "XAGUSD": { contract: 5000, price: 31.50 },
+            "EURUSD": { contract: 100000, price: 1.0850 },
+            "GBPUSD": { contract: 100000, price: 1.2950 },
+            "USDJPY": { contract: 100000, price: 148.50 },
+            "AUDUSD": { contract: 100000, price: 0.6750 },
+            "USDCAD": { contract: 100000, price: 1.3500 },
+            "USDCHF": { contract: 100000, price: 0.8850 },
+            "NZDUSD": { contract: 100000, price: 0.6150 }
+        };
+
+        let allTradesData = [];
+        let currentPage = 1;
+        const pageSize = 30;
+
+        function switchTheme(themeName) {
+            const html = document.documentElement;
+            html.classList.remove('theme-obsidian', 'theme-cyber', 'theme-gold', 'theme-titanium', 'theme-frost');
+            html.classList.add(`theme-${themeName}`);
+            localStorage.setItem('forexUncleTheme', themeName);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('forexUncleTheme') || 'obsidian';
+            const selector = document.getElementById('themeSelector');
+            if (selector) selector.value = savedTheme;
+            switchTheme(savedTheme);
+
+            document.getElementById('totalTrades').value = "60";
+
+            updatePairConfigFields();
+            runSimulation();
+        });
+
+        function updatePairConfigFields() {
+            const pair = document.getElementById('assetPair').value;
+            if (pairDefaults[pair]) {
+                document.getElementById('customContractSize').value = pairDefaults[pair].contract;
+                document.getElementById('customMarketPrice').value = pairDefaults[pair].price;
+            }
+        }
+
+        function runSimulation() {
+            let equity = parseFloat(document.getElementById('initBalance').value);
+            const leverage = parseFloat(document.getElementById('leverage').value);
+            const maxRiskCapPct = parseFloat(document.getElementById('maxMarginPct').value) / 100;
+            const totalTrades = parseInt(document.getElementById('totalTrades').value);
+            const riskMode = document.getElementById('riskMode').value;
+            const pair = document.getElementById('assetPair').value;
+            const contractSize = parseFloat(document.getElementById('customContractSize').value);
+            const marketPrice = parseFloat(document.getElementById('customMarketPrice').value);
+            const slPoints = parseFloat(document.getElementById('stopLossPips').value);
+            const rr = parseFloat(document.getElementById('rrRatio').value);
+            const targetWinRate = parseFloat(document.getElementById('winRate').value) / 100;
+            
+            const initialStartingEquity = equity;
+            let wins = 0;
+            allTradesData = [];
+            currentPage = 1;
+
+            document.getElementById('execCountLabel').innerText = `${totalTrades} Executions`;
+            document.getElementById('ledgerTitle').innerText = `Execution Ledger (${totalTrades} Trades)`;
+            document.getElementById('modeBadge').innerText = riskMode === 'dynamic' ? 'DYNAMIC MODE' : 'STATIC FIXED MODE';
+
+            for (let i = 1; i <= totalTrades; i++) {
+                let isWin = (Math.random() < targetWinRate);
+                if (isWin) wins++;
+
+                let startEquity = equity;
+                let baseEquityForSizing = (riskMode === 'static') ? initialStartingEquity : startEquity;
+
+                let maxAllowedRiskDollar = baseEquityForSizing * maxRiskCapPct;
+
+                let dollarPerPointPerLot = (pair.includes('USD') && !pair.startsWith('USD') && pair !== 'XAUUSD' && pair !== 'XAGUSD') ? 10 : (contractSize * 0.0001 * 10);
+                if (pair === 'XAUUSD') dollarPerPointPerLot = contractSize;
+                if (pair === 'XAGUSD') dollarPerPointPerLot = contractSize * 0.01;
+
+                let riskBasedLotSize = maxAllowedRiskDollar / (dollarPerPointPerLot * slPoints);
+                
+                let maxAllowedMargin = baseEquityForSizing * maxRiskCapPct;
+                let maxNotionalByMargin = maxAllowedMargin * leverage;
+                let marginBasedLotSize = maxNotionalByMargin / (contractSize * marketPrice);
+
+                let finalLotSize = Math.min(riskBasedLotSize, marginBasedLotSize);
+                
+                if (baseEquityForSizing <= 1000 && pair === 'XAUUSD' && maxRiskCapPct <= 0.30) {
+                    finalLotSize = Math.min(finalLotSize, 0.01);
+                }
+
+                finalLotSize = Math.floor(finalLotSize * 100) / 100;
+                if (finalLotSize < 0.01) finalLotSize = 0.01;
+
+                let actualNotional = finalLotSize * contractSize * marketPrice;
+                let actualMarginUsed = actualNotional / leverage;
+                let actualRiskDollar = finalLotSize * dollarPerPointPerLot * slPoints;
+                let totalProfitDollar = actualRiskDollar * rr;
+
+                let netPL = isWin ? totalProfitDollar : -actualRiskDollar;
+                equity += netPL;
+
+                allTradesData.push({
+                    id: i,
+                    pair: pair,
+                    startEq: startEquity,
+                    lotSize: finalLotSize,
+                    riskDollar: actualRiskDollar,
+                    margin: actualMarginUsed,
+                    status: isWin ? "WIN" : "LOSS",
+                    pl: netPL,
+                    endEq: equity
+                });
+            }
+
+            let netPLTotal = equity - initialStartingEquity;
+            let returnPct = (netPLTotal / initialStartingEquity) * 100;
+
+            document.getElementById('resEndBalance').innerText = `$${equity.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            let netPLElem = document.getElementById('resNetPL');
+            netPLElem.innerText = `${netPLTotal >= 0 ? '+' : ''}$${netPLTotal.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            netPLElem.className = `text-lg sm:text-xl font-bold font-mono ${netPLTotal >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'} truncate`;
+
+            let returnElem = document.getElementById('resReturnPct');
+            returnElem.innerText = `${returnPct >= 0 ? '+' : ''}${returnPct.toFixed(2)}%`;
+            returnElem.className = `text-lg sm:text-xl font-bold font-mono ${returnPct >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'} truncate`;
+
+            document.getElementById('resActualWinRate').innerText = `${((wins / totalTrades) * 100).toFixed(0)}% (${wins}/${totalTrades})`;
+
+            renderPage();
+        }
+
+        function renderPage() {
+            const tbody = document.getElementById('tradeBody');
+            tbody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = Math.min(startIndex + pageSize, allTradesData.length);
+            const pageData = allTradesData.slice(startIndex, endIndex);
+
+            pageData.forEach(t => {
+                let row = document.createElement('tr');
+                row.className = "hover:opacity-90 transition-colors";
+                row.innerHTML = `
+                    <td class="py-3 px-3 sm:px-4 font-semibold app-text-muted">#${t.id}</td>
+                    <td class="py-3 px-3 sm:px-4 font-bold text-teal-600 dark:text-teal-400">${t.pair}</td>
+                    <td class="py-3 px-3 sm:px-4">$${t.startEq.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td class="py-3 px-3 sm:px-4 font-bold text-amber-600 dark:text-amber-400">${t.lotSize.toFixed(2)}</td>
+                    <td class="py-3 px-3 sm:px-4 app-text-muted">$${t.riskDollar.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td class="py-3 px-3 sm:px-4 app-text-muted">$${t.margin.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td class="py-3 px-3 sm:px-4 font-semibold ${t.status === 'WIN' ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">${t.status}</td>
+                    <td class="py-3 px-3 sm:px-4 font-bold ${t.pl >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-500'}">${t.pl >= 0 ? '+' : ''}$${t.pl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td class="py-3 px-3 sm:px-4 font-semibold">${formatterMoney(t.endEq)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            const totalPages = Math.ceil(allTradesData.length / pageSize);
+            document.getElementById('pageIndicator').innerText = `Page ${currentPage} of ${totalPages} (Trades ${startIndex + 1} - ${endIndex})`;
+            
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages;
+
+            const pageNumbersContainer = document.getElementById('pageNumbers');
+            pageNumbersContainer.innerHTML = '';
+            for (let p = 1; p <= totalPages; p++) {
+                let span = document.createElement('button');
+                span.innerText = p;
+                span.className = `w-7 h-7 rounded-lg text-xs font-mono flex items-center justify-center transition-colors flex-shrink-0 ${p === currentPage ? 'bg-teal-500 text-slate-950 font-bold shadow-lg shadow-teal-500/20' : 'app-input hover:opacity-80 app-text-muted border app-border'}`;
+                span.onclick = () => {
+                    currentPage = p;
+                    renderPage();
+                };
+                pageNumbersContainer.appendChild(span);
+            }
+        }
+
+        function formatterMoney(val) {
+            return `$${val.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+        }
+
+        changePage = function(direction) {
+            const totalPages = Math.ceil(allTradesData.length / pageSize);
+            currentPage += direction;
+            if (currentPage < 1) currentPage = 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            renderPage();
+        }
+    </script>
+</body>
+</html>
