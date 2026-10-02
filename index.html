@@ -306,7 +306,7 @@
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
                             Core Parameters
                         </h2>
-                        <span id="execCountLabel" class="text-xs font-mono app-text-muted">15 Executions</span>
+                        <span id="execCountLabel" class="text-xs font-mono app-text-muted">5 Executions</span>
                     </div>
 
                     <div class="space-y-3.5 sm:space-y-4">
@@ -336,7 +336,9 @@
                             <div>
                                 <label class="block text-xs font-medium app-text-muted uppercase tracking-wider mb-1.5">Total Trades</label>
                                 <select id="totalTrades" class="w-full app-input border rounded-xl px-3 py-2.5 text-sm font-mono focus:outline-none" onchange="runSimulation()">
-                                    <option value="15" selected>15 Trades</option>
+                                    <option value="5" selected>5 Trades</option>
+                                    <option value="10">10 Trades</option>
+                                    <option value="15">15 Trades</option>
                                     <option value="30">30 Trades</option>
                                     <option value="60">60 Trades</option>
                                     <option value="90">90 Trades</option>
@@ -453,7 +455,7 @@
 
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-1 no-print">
                     <div class="flex items-center space-x-2.5 sm:space-x-3 flex-wrap">
-                        <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (15 Trades)</h3>
+                        <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (5 Trades)</h3>
                         <span class="text-[9px] sm:text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold" id="modeBadge">DYNAMIC MODE</span>
                     </div>
                 </div>
@@ -520,7 +522,7 @@
                     <div class="px-4 sm:px-6 py-3.5 sm:py-4 border-t app-border app-card backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-3 relative z-10 no-print">
                         <div class="text-xs font-mono app-text-muted flex items-center space-x-2" style="white-space: nowrap;">
                             <span>Showing records:</span>
-                            <strong id="recordRangeText" class="text-teal-600 dark:text-teal-400">1 - 15</strong>
+                            <strong id="recordRangeText" class="text-teal-600 dark:text-teal-400">1 - 5</strong>
                         </div>
                         <div class="flex items-center space-x-3">
                             <button onclick="changePage(-1)" id="prevBtn" class="app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2.5 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1 shadow-sm flex-shrink-0">
@@ -603,7 +605,18 @@
             const savedTheme = localStorage.getItem('forexUncleTheme') || 'obsidian';
             applyTheme(savedTheme);
 
-            document.getElementById('totalTrades').value = "15";
+            document.getElementById('totalTrades').innerHTML = `
+                <option value="5" selected>5 Trades</option>
+                <option value="10">10 Trades</option>
+                <option value="15">15 Trades</option>
+                <option value="30">30 Trades</option>
+                <option value="60">60 Trades</option>
+                <option value="90">90 Trades</option>
+                <option value="180">180 Trades</option>
+                <option value="270">270 Trades</option>
+                <option value="360">360 Trades</option>
+            `;
+            document.getElementById('totalTrades').value = "5";
 
             updatePairConfigFields();
             runSimulation();
@@ -740,7 +753,7 @@
             let equity = parseFloat(document.getElementById('initBalance').value) || 1000;
             const leverage = parseFloat(document.getElementById('leverage').value) || 20;
             const maxRiskCapPct = parseFloat(document.getElementById('maxMarginPct').value) || 30;
-            const totalTrades = parseInt(document.getElementById('totalTrades').value) || 15;
+            const totalTrades = parseInt(document.getElementById('totalTrades').value) || 5;
             const riskMode = document.getElementById('riskMode').value;
             const pair = document.getElementById('assetPair').value;
             const contractSize = parseFloat(document.getElementById('customContractSize').value) || 100;
@@ -901,7 +914,7 @@
                     <td class="py-3 px-3 sm:px-4 text-right">$${t.margin.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
                     <td class="py-3 px-3 sm:px-4 font-semibold text-center">${t.status}</td>
                     <td class="py-3 px-3 sm:px-4 font-bold text-right">${t.pl >= 0 ? '+' : ''}$${t.pl.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-                    <td class="py-3 px-3 sm:px-4 font-semibold text-right">${formatterMoney(t.endEq)}</td>
+                    <td class="py-3 px-4 font-semibold text-right">${formatterMoney(t.endEq)}</td>
                 `;
                 tbody.appendChild(row);
             });
