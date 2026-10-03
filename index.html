@@ -123,6 +123,14 @@
             animation: shimmerText 6s linear infinite;
         }
 
+        .active-spin {
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         @media print {
             @page {
                 size: A4 portrait;
@@ -421,11 +429,11 @@
                 </div>
 
                 <div class="mt-5 sm:mt-6 pt-4 border-t app-border relative z-10 space-y-3">
-                    <button onclick="runSimulation()" id="rerollBtn" class="w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-400 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-xl shadow-teal-500/20 transition-all duration-200 text-sm tracking-wider uppercase active:scale-[0.98] flex items-center justify-center space-x-2 relative overflow-hidden">
+                    <button onclick="runSimulation()" id="rerollBtn" class="w-full bg-gradient-to-r from-teal-500 via-emerald-500 to-teal-400 hover:from-teal-400 hover:to-emerald-400 text-slate-950 font-bold py-3.5 px-4 rounded-xl shadow-xl shadow-teal-500/20 transition-all duration-200 text-sm tracking-wider uppercase active:scale-[0.98] flex items-center justify-center space-x-2 relative overflow-hidden cursor-pointer">
                         <svg id="rerollSpinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                         <span id="rerollBtnText">RE-ROLL SIMULATION</span>
                     </button>
-                    <button onclick="printSimulationPlan()" class="w-full app-card app-border border hover:opacity-80 text-teal-600 dark:text-teal-400 font-bold py-3 px-4 rounded-xl shadow-lg transition-all text-xs tracking-wider uppercase flex items-center justify-center space-x-2">
+                    <button onclick="printSimulationPlan()" class="w-full app-card app-border border hover:opacity-80 text-teal-600 dark:text-teal-400 font-bold py-3 px-4 rounded-xl shadow-lg transition-all text-xs tracking-wider uppercase flex items-center justify-center space-x-2 cursor-pointer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                         <span>Print Simulation Roadmap</span>
                     </button>
@@ -457,6 +465,12 @@
                     <div class="flex items-center space-x-2.5 sm:space-x-3 flex-wrap">
                         <h3 class="font-semibold text-xs sm:text-sm uppercase tracking-wider" id="ledgerTitle">Execution Ledger (5 Trades)</h3>
                         <span class="text-[9px] sm:text-[10px] font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400 px-2 py-0.5 rounded-full border border-amber-500/20 font-bold" id="modeBadge">DYNAMIC MODE</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="runSimulation()" title="Re-roll Simulation" class="app-card app-border border hover:bg-teal-500/10 text-teal-600 dark:text-teal-400 px-2.5 py-1.5 rounded-xl text-xs font-mono flex items-center space-x-1.5 transition-all shadow-sm cursor-pointer group">
+                            <svg id="headerRerollIcon" class="w-3.5 h-3.5 transition-transform duration-500 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                            <span class="text-[11px] font-bold uppercase tracking-wider">Re-roll</span>
+                        </button>
                     </div>
                 </div>
 
@@ -525,11 +539,11 @@
                             <strong id="recordRangeText" class="text-teal-600 dark:text-teal-400">1 - 5</strong>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <button onclick="changePage(-1)" id="prevBtn" class="app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2.5 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1 shadow-sm flex-shrink-0">
+                            <button onclick="changePage(-1)" id="prevBtn" class="app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2.5 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1 shadow-sm flex-shrink-0 cursor-pointer">
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
                                 <span>Prev</span>
                             </button>
-                            <button onclick="changePage(1)" id="nextBtn" class="app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2.5 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1 shadow-sm flex-shrink-0">
+                            <button onclick="changePage(1)" id="nextBtn" class="app-input app-border border hover:opacity-80 font-mono text-xs px-4 py-2.5 rounded-xl transition-all disabled:opacity-30 disabled:cursor-not-allowed flex items-center space-x-1 shadow-sm flex-shrink-0 cursor-pointer">
                                 <span>Next</span>
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
                             </button>
@@ -725,28 +739,31 @@
             const btn = document.getElementById('rerollBtn');
             const spinner = document.getElementById('rerollSpinner');
             const btnText = document.getElementById('rerollBtnText');
+            const headerIcon = document.getElementById('headerRerollIcon');
 
-            btn.disabled = true;
-            spinner.classList.remove('hidden');
+            if (btn) btn.disabled = true;
+            if (spinner) spinner.classList.remove('hidden');
+            if (headerIcon) headerIcon.classList.add('active-spin');
+
             let progress = 0;
-            
             const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 25) + 15;
+                progress += Math.floor(Math.random() * 30) + 20;
                 if (progress >= 100) {
                     progress = 100;
-                    btnText.innerText = `COMPUTING MATRIX (${progress}%)...`;
+                    if (btnText) btnText.innerText = `COMPUTING MATRIX (${progress}%)...`;
                     clearInterval(interval);
                     
                     setTimeout(() => {
                         executeSimulationLogic();
-                        btnText.innerText = "RE-ROLL SIMULATION";
-                        spinner.classList.add('hidden');
-                        btn.disabled = false;
-                    }, 120);
+                        if (btnText) btnText.innerText = "RE-ROLL SIMULATION";
+                        if (spinner) spinner.classList.add('hidden');
+                        if (headerIcon) headerIcon.classList.remove('active-spin');
+                        if (btn) btn.disabled = false;
+                    }, 150);
                 } else {
-                    btnText.innerText = `COMPUTING MATRIX (${progress}%)...`;
+                    if (btnText) btnText.innerText = `COMPUTING MATRIX (${progress}%)...`;
                 }
-            }, 50);
+            }, 60);
         }
 
         function executeSimulationLogic() {
